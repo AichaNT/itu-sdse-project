@@ -30,3 +30,23 @@ mlflow.set_experiment(experiment_name)
 data = pd.read_csv(data_gold_path)
 
 # Split columns
+data = data.drop(["lead_id", "customer_code", "date_part"], axis=1)
+
+cat_cols = ["customer_group", "onboarding", "bin_source", "source"]
+cat_vars = data[cat_cols]
+
+other_vars = data.drop(cat_cols, axis=1)
+
+# Create dummy variables for categorical vars
+for col in cat_vars:
+    cat_vars[col] = cat_vars[col].astype("category")
+    cat_vars = create_dummy_cols(cat_vars, col)
+
+data = pd.concat([other_vars, cat_vars], axis=1)
+
+for col in data:
+    data[col] = data[col].astype("float64")
+    print(f"Changed column {col} to float")
+
+# not finished, might want to either save "preprocessed" data here,
+# and then make a separate "split" step, or split and save here - though that does not seem smart.
