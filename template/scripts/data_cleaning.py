@@ -52,7 +52,7 @@ def impute_missing_values(x, method="mean"):
 
 
 
-# Set min and max date (probably shouldn't be hardcoded)
+# Set min and max date
 max_date = "2024-01-31"
 min_date = "2024-01-01"
 
@@ -141,40 +141,5 @@ cat_vars.loc[cat_vars['customer_code'].isna(),'customer_code'] = 'None'
 cat_vars = cat_vars.apply(impute_missing_values)
 cat_vars.apply(lambda x: pd.Series([x.count(), x.isnull().sum()], index = ['Count', 'Missing'])).T
 
-# Standardise data (might want to split into separate .py script for preprocessing from here)
-scaler_path = "./artifacts/scaler.pkl"
-
-scaler = MinMaxScaler()
-scaler.fit(cont_vars)
-
-joblib.dump(value=scaler, filename=scaler_path)
-
-cont_vars = pd.DataFrame(scaler.transform(cont_vars), columns=cont_vars.columns)
-
-# Combine data
-cont_vars = cont_vars.reset_index(drop=True)
-cat_vars = cat_vars.reset_index(drop=True)
-data = pd.concat([cat_vars, cont_vars], axis=1)
-
-# Create data drift artifact
-data_columns = list(data.columns)
-with open('./artifacts/columns_drift.json','w+') as f:           
-    json.dump(data_columns,f)
-
-# Saving data pre-binning
-data.to_csv('./artifacts/training_data.csv', index=False)
-
-# Binning object columns
-data['bin_source'] = data['source']
-values_list = ['li', 'organic','signup','fb']
-data.loc[~data['source'].isin(values_list),'bin_source'] = 'Others'
-mapping = {'li' : 'socials', 
-           'fb' : 'socials', 
-           'organic': 'group1', 
-           'signup': 'group1'
-           }
-
-data['bin_source'] = data['source'].map(mapping)
-
-#Saving gold medallion dataset
-data.to_csv('./artifacts/train_data_gold.csv', index=False)
+cat_vars.to_csv("./artifacts/cat_vars_clean.csv", index=False)
+cont_vars.to_csv("./artifacts/cont_vars_clean.csv", index=False)
