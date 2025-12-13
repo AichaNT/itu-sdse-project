@@ -18,14 +18,14 @@ current_date = datetime.datetime.now().strftime("%Y_%B_%d")
 data_version = "00000"
 experiment_name = current_date
 
-# Create paths
-os.makedirs("./models/mlruns", exist_ok=True)
-os.makedirs("/models/mlruns/.trash", exist_ok=True)
-
 # Supress warnings
 warnings.filterwarnings('ignore')
 
+mlflow.set_tracking_uri("file:./models/mlruns")
 mlflow.set_experiment(experiment_name)
+
+# Create paths
+os.makedirs("./models/mlruns/.trash", exist_ok=True)
 
 # Load training split
 train = pd.read_csv("./data/processed/train.csv")
