@@ -2,6 +2,7 @@
 import time
 import mlflow
 import datetime
+import json
 from mlflow.tracking.client import MlflowClient 
 from mlflow.entities.model_registry.model_version_status import ModelVersionStatus
 
@@ -66,3 +67,10 @@ if run_id is not None:
     model_details = mlflow.register_model(model_uri=model_uri, name=model_name) 
     wait_until_ready(model_details.name, model_details.version) 
     model_details = dict(model_details) 
+
+# Saving model information
+with open('artifacts/best_model.json', 'w') as f:
+    json.dump({
+        "model_name": model_name,
+        "model_version": model_details['version']
+    }, f)
