@@ -26,7 +26,14 @@ os.makedirs("mlruns/.trash", exist_ok=True)
 mlflow.set_experiment(experiment_name)
 
 # Load training split
-#
+train = pd.read_csv("./artifacts/train.csv")
+test = pd.read_csv("./artifacts/test.csv")
+
+X_train = train.drop(columns=["lead_indicator"])
+y_train = train["lead_indicator"]
+
+X_test = test.drop(columns=["lead_indicator"])
+y_test = test["lead_indicator"]
 
 # SKLearn logistic regression
 class lr_wrapper(mlflow.pyfunc.PythonModel): #C: custom wrapper for MLflow to log predict_proba outputs
@@ -65,7 +72,7 @@ with mlflow.start_run(experiment_id=experiment_id) as run: #C: start MLflow run
     mlflow.log_param("data_version", "00000")
     
     # store model for model interpretability
-    joblib.dump(value=model, filename=lr_model_path)
+    joblib.dump(value=best_model, filename=lr_model_path)
         
     # Custom python model for predicting probability - C: logging to MLflow
     mlflow.pyfunc.log_model('model', python_model=lr_wrapper(best_model)) # changed from model to best_model
