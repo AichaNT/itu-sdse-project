@@ -47,7 +47,7 @@ def impute_missing_values(x, method="mean"):
 
 
 # Re-fetch cont_var and cat_var variables
-data = pd.read_csv("./artifacts/clean_data.csv")
+data = pd.read_csv("./data/interim/clean_data.csv")
 
 # Create categorical data columns
 vars = [
@@ -102,7 +102,7 @@ with open('./artifacts/columns_drift.json','w+') as f:
     json.dump(data_columns,f)
 
 # Saving data pre-binning
-data.to_csv('./artifacts/training_data.csv', index=False)
+data.to_csv('./data/interim/training_data.csv', index=False)
 
 # Binning object columns
 data['bin_source'] = data['source']
@@ -117,4 +117,4 @@ mapping = {'li' : 'socials',
 data['bin_source'] = data['source'].map(mapping)
 
 #Saving gold medallion dataset
-data.to_csv('./artifacts/train_data_gold.csv', index=False)
+data.to_csv('./data/processed/train_data_gold.csv', index=False)
