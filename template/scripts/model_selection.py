@@ -11,6 +11,7 @@ def wait_until_ready(model_name, model_version):
     client = MlflowClient()
     for _ in range(10):
         model_version_details = client.get_model_version( 
+          name=model_name, 
           version=model_version,
         )
         status = ModelVersionStatus.from_string(model_version_details.status) 
