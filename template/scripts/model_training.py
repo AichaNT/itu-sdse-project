@@ -1,12 +1,11 @@
 # Imports
 import os
+import pandas as pd
 import datetime
 import mlflow
 import mlflow.pyfunc
 import json
-import joblib 
-import matplotlib.pyplot as plt 
-from sklearn.model_selection import train_test_split
+import joblib
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import f1_score
 from sklearn.model_selection import RandomizedSearchCV
