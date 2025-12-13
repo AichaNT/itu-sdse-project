@@ -12,9 +12,6 @@ def create_dummy_cols(df, col):
 # Saving constant variables
 data_gold_path = "./data/processed/train_data_gold.csv" 
 
-# Create paths
-os.makedirs("artifacts", exist_ok=True)
-
 # Load training data
 data = pd.read_csv(data_gold_path)
 
