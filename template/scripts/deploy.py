@@ -12,7 +12,6 @@ def wait_for_deployment(model_name, model_version, stage='Staging'):
             client.get_model_version(name=model_name,version=model_version) 
             )
         if model_version_details['current_stage'] == stage: 
-            print(f'Transition completed to {stage}')
             status = True
             break
         else:
@@ -38,5 +37,3 @@ if model_version_details['current_stage'] != 'Staging':
         archive_existing_versions=True 
     )
     model_status = wait_for_deployment(model_name, model_version, 'Staging') 
-else:
-    print('Model already in staging') 
