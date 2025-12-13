@@ -17,8 +17,8 @@ os.makedirs("./artifacts",exist_ok=True)
 warnings.filterwarnings('ignore')
 pd.set_option('display.float_format',lambda x: "%.3f" % x)
 
-# Read data
-data = pd.read_csv("./artifacts/raw_data.csv") #change path once project structure is defined
+
+data = pd.read_csv("./data/raw/raw_data.csv") #change path once project structure is defined
 
 if not max_date:
     max_date = pd.to_datetime(datetime.datetime.now().date()).date()
@@ -67,4 +67,4 @@ data = data[data.source == "signup"]
 result=data.lead_indicator.value_counts(normalize = True)
 
 # saving cleaned data to csv for preprocessing
-data.to_csv("./artifacts/clean_data.csv", index=False)
+data.to_csv("./data/interim/clean_data.csv", index=False)
