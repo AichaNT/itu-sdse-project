@@ -1,5 +1,7 @@
 # Imports
 import mlflow
+import json
+import time
 from mlflow.tracking import MlflowClient
 
 # Helper function
@@ -17,8 +19,13 @@ def wait_for_deployment(model_name, model_version, stage='Staging'):
             time.sleep(2) 
     return status 
 
+# Load model info from selection step
+with open('artifacts/best_model.json') as f:
+    best_model = json.load(f)
 
-model_version = 1 
+model_name = best_model['model_name']
+model_version = best_model['model_version']
+ 
 
 client = MlflowClient()
 
