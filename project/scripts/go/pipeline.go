@@ -32,8 +32,6 @@ func Build(ctx context.Context) error {
 		WithDirectory("python", client.Host().Directory("python-files")).
 		WithExec([]string{"python", "--version"})
 
-	python = python.WithExec([]string{"python", "python/hello.py"})
-
 	_, err = python.Directory("output").Export(ctx, "output")
 	if err != nil {
 		return err
