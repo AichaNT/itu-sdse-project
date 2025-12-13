@@ -78,9 +78,6 @@ cat_vars.loc[cat_vars['customer_code'].isna(),'customer_code'] = 'None'
 cat_vars = cat_vars.apply(impute_missing_values)
 cat_vars.apply(lambda x: pd.Series([x.count(), x.isnull().sum()], index = ['Count', 'Missing'])).T
 
-cat_vars.to_csv("./artifacts/cat_vars_clean.csv", index=False)
-cont_vars.to_csv("./artifacts/cont_vars_clean.csv", index=False)
-
 # Standardise data
 scaler_path = "./artifacts/scaler.pkl"
 
