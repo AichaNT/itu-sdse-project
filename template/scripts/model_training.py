@@ -6,6 +6,7 @@ import mlflow
 import mlflow.pyfunc
 import json
 import joblib
+import warnings
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import f1_score
 from sklearn.model_selection import RandomizedSearchCV
@@ -20,6 +21,9 @@ experiment_name = current_date
 # Create paths
 os.makedirs("mlruns", exist_ok=True)
 os.makedirs("mlruns/.trash", exist_ok=True)
+
+# Supress warnings
+warnings.filterwarnings('ignore')
 
 mlflow.set_experiment(experiment_name)
 
