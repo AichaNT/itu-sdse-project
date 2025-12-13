@@ -12,13 +12,12 @@ max_date = "2024-01-31"
 min_date = "2024-01-01"
 
 
-os.makedirs("artifacts",exist_ok=True)
+os.makedirs("./artifacts",exist_ok=True)
 
 warnings.filterwarnings('ignore')
 pd.set_option('display.float_format',lambda x: "%.3f" % x)
 
 # Read data
-# skips the dvc pull step, since this happens inside our dagger workflow, where the raw_data.csv artifact is produced
 data = pd.read_csv("./artifacts/raw_data.csv") #change path once project structure is defined
 
 if not max_date:
@@ -48,7 +47,7 @@ data = data.drop(
     axis=1
 )
 
-# Removing columns that will be added back after EDA
+# Removing columns
 data = data.drop(
     ["domain", "country", "visited_learn_more_before_booking", "visited_faq"],
     axis=1
