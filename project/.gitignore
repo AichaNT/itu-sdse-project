@@ -1,8 +1,9 @@
 # Data files
-data/**
+data/*
 
 # keep the actual folders
-!data/**/*.gitkeep
+!data/**/
+!data/**/.gitkeep
 !data/**/*.dvc
 
 # Mac OS-specific storage files
