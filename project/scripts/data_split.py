@@ -10,7 +10,7 @@ def create_dummy_cols(df, col):
     return new_df
 
 # Saving constant variables
-data_gold_path = "./artifacts/train_data_gold.csv" 
+data_gold_path = "./data/processed/train_data_gold.csv" 
 
 # Create paths
 os.makedirs("artifacts", exist_ok=True)
@@ -50,5 +50,5 @@ train_df["lead_indicator"] = y_train
 test_df = X_test.copy()
 test_df["lead_indicator"] = y_test
 
-train_df.to_csv("./artifacts/train.csv", index=False)
-test_df.to_csv("./artifacts/test.csv", index=False)
+train_df.to_csv("./data/processed/train.csv", index=False)
+test_df.to_csv("./data/processed/test.csv", index=False)
