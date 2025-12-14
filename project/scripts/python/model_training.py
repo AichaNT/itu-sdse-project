@@ -73,7 +73,7 @@ with mlflow.start_run(experiment_id=experiment_id) as run:
     # log everything but mlruns
     mlflow.log_artifacts("./artifacts/temp_models", artifact_path="temp_models")
     mlflow.log_artifacts("./artifacts/metrics", artifact_path="metrics")
-    mlflow.log_artifact("./artifacts/scalar.pkl", artifact_path="scalar")
+    mlflow.log_artifact("./artifacts/scaler.pkl", artifact_path="scaler")
     
     # store model for model interpretability
     joblib.dump(value=best_model, filename=lr_model_path)
