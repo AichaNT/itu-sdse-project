@@ -1,16 +1,17 @@
 # ITU BDS MLOPS'25 - Project (unfinished)
 This repository contains our final project for the course Data Science in Production: MLOps and Software Engineering (Autumn 2025) at the IT University of Copenhagen.
 
-The objective of the project is to transform a given Python notebook monolith into a modular and production-ready MLOps pipeline. The project includes:
-- Modular Codebase: Clear separation of task (data cleaning, preprocessing, splitting as well as model training, selection and deployment).
-- Dagger workflow (in Go): Automated pipelines using Dagger (Go) to run tasks locally or in CI/CD environments, ensuring that each step can run reliably and reproducibly.
-- GitHub automation workflow: GitHub Actions handle automated training whenever changes are pushed. (??)
+The objective of the project is to restructure a single Python notebook into a modular MLOps pipeline. Key features of the project include:
+- Modular Codebase: Clear separation of tasks, including data cleaning, preprocessing, dataset splitting, model training, selection, and deployment.
+- Dagger Workflow (Go): Automated pipelines using Dagger to run tasks locally or in CI/CD environments, ensuring reliable and reproducible execution of each pipeline step.
+- GitHub Automation Workflow: GitHub Actions handle automated training whenever changes are pushed. (??)
 
 Finally the project output a model artifact produced by GitHub workflow and named 'model'.
 
-## How to run the code
+## How to Run the Code (unfinished)
 
-## Project Structure
+
+## Project Structure (unfinished)
 ```
 ├── README.md           <-
 │
@@ -42,7 +43,7 @@ Finally the project output a model artifact produced by GitHub workflow and name
     │   ├── metrics         <-
     │   └── temp_models     <-
     │
-    ├── requirements.txt    <- The requirements file for reproducing the analysis environment, e.g.
+    ├── requirements.txt    <- The requirements file for reproducing the analysia environment, e.g.
     │                          generated with `pip freeze > requirements.txt`
     │
     └── scripts             <- Source code for use in this project.
@@ -64,3 +65,11 @@ Finally the project output a model artifact produced by GitHub workflow and name
         │
         └── model_inference.py      <- 
 ```
+
+## Authors
+Aicha Nadja Thorman, aith@itu.dk
+
+Cæcilie Abildgaard Jeppesen, cjep@itu.dk
+
+## Acknowledgments
+This project was created using the CookieCutter template.
