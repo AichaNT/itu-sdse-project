@@ -50,7 +50,8 @@ experiment_id = mlflow.get_experiment_by_name(experiment_name).experiment_id
 
 with mlflow.start_run(experiment_id=experiment_id) as run: 
     model = LogisticRegression() 
-    lr_model_path = "./artifacts/temp_models/lead_model_lr.pkl"
+    #lr_model_path = "./artifacts/temp_models/lead_model_lr.pkl"
+    lr_model_path = "./models/model.pkl"
 
     params = {
               'solver': ["newton-cg", "lbfgs", "liblinear", "sag", "saga"],
@@ -71,7 +72,7 @@ with mlflow.start_run(experiment_id=experiment_id) as run:
     mlflow.log_param("data_version", "00000")
 
     # log everything but mlruns
-    mlflow.log_artifacts("./artifacts/temp_models", artifact_path="temp_models")
+    mlflow.log_artifacts(lr_model_path, artifact_path="models")
     mlflow.log_artifacts("./artifacts/metrics", artifact_path="metrics")
     mlflow.log_artifact("./artifacts/scaler.pkl", artifact_path="scaler")
     
