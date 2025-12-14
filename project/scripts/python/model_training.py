@@ -50,7 +50,7 @@ experiment_id = mlflow.get_experiment_by_name(experiment_name).experiment_id
 
 with mlflow.start_run(experiment_id=experiment_id) as run: 
     model = LogisticRegression() 
-    lr_model_path = "./artifacts/lead_model_lr.pkl"
+    lr_model_path = "./artifacts/temp_models/lead_model_lr.pkl"
 
     params = {
               'solver': ["newton-cg", "lbfgs", "liblinear", "sag", "saga"],
@@ -85,11 +85,11 @@ model_results = {
 }
 
 # Save columns and model results
-column_list_path = './artifacts/columns_list.json'
+column_list_path = './artifacts/metrics/columns_list.json'
 with open(column_list_path, 'w+') as columns_file:
     columns = {'column_names': list(X_train.columns)}
     json.dump(columns, columns_file)
 
-model_results_path = "./artifacts/model_results.json"
+model_results_path = "./artifacts/metrics/model_results.json"
 with open(model_results_path, 'w+') as results_file:
     json.dump(model_results, results_file)
