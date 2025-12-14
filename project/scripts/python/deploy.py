@@ -19,13 +19,13 @@ def wait_for_deployment(model_name, model_version, stage='Staging'):
     return status 
 
 # Load model info from selection step
-with open('./models/best_model.json') as f:
+with open('./artifacts/best_model.json') as f:
     best_model = json.load(f)
 
 model_name = best_model['model_name']
 model_version = best_model['model_version']
  
-mlflow.set_tracking_uri("file:./models/mlruns")
+mlflow.set_tracking_uri("file:./artifacts/mlruns")
 client = MlflowClient()
 
 model_version_details = dict(client.get_model_version(name=model_name,version=model_version)) 
