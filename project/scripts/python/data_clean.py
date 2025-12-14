@@ -12,7 +12,8 @@ max_date = "2024-01-31"
 min_date = "2024-01-01"
 
 
-os.makedirs("./artifacts",exist_ok=True)
+os.makedirs("./artifacts/temp_models", exist_ok=True)
+os.makedirs("./artifacts/metrics", exist_ok=True)
 
 warnings.filterwarnings('ignore')
 pd.set_option('display.float_format',lambda x: "%.3f" % x)
