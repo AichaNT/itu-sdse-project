@@ -25,6 +25,7 @@ artifact_path = "model"
 model_name = "lead_model" 
 experiment_name = current_date 
 
+mlflow.set_tracking_uri("file:./models/mlruns")
 experiment_ids = [mlflow.get_experiment_by_name(experiment_name).experiment_id] 
 
 experiment_best = mlflow.search_runs(
