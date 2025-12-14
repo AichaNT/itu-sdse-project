@@ -71,7 +71,7 @@ if run_id is not None:
     model_details = dict(model_details) 
 
 # Saving model information
-with open('./artifacts/best_model.json', 'w') as f:
+with open('./artifacts/metrics/best_model.json', 'w') as f:
     json.dump({
         "model_name": model_name,
         "model_version": model_details['version']
