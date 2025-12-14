@@ -50,7 +50,6 @@ experiment_id = mlflow.get_experiment_by_name(experiment_name).experiment_id
 
 with mlflow.start_run(experiment_id=experiment_id) as run: 
     model = LogisticRegression() 
-    #lr_model_path = "./artifacts/temp_models/lead_model_lr.pkl"
     lr_model_path = "./models/model.pkl"
 
     params = {
