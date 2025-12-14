@@ -34,7 +34,7 @@ data = data[(data["date_part"] >= min_date) & (data["date_part"] <= max_date)]
 min_date = data["date_part"].min()
 max_date = data["date_part"].max()
 date_limits = {"min_date": str(min_date), "max_date": str(max_date)}
-with open("./artifacts//metrics/date_limits.json", "w") as f:
+with open("./artifacts/metrics/date_limits.json", "w") as f:
     json.dump(date_limits, f)
 
 
