@@ -29,8 +29,11 @@ func Build(ctx context.Context) error {
 	// Define Container with requirements, bash commands and python scripts
 	python := client.Container().
 		From("python:3.12.2-bookworm").
-		WithDirectory("python", client.Host().Directory("python-files")).
-		WithExec([]string{"python", "--version"})
+		WithDirectory("/app", client.Host().Directory("project")).
+		WithWorkdir("/app").
+		WithExec([]string{"pip", "install", "-r", "requirements.txt"}).
+		WithExec([]string{"dvc", "pull"}).
+		WithExec([]string{""}).
 
 	_, err = python.Directory("output").Export(ctx, "output")
 	if err != nil {
