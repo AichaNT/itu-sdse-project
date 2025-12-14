@@ -29,18 +29,18 @@ func Build(ctx context.Context) error {
 	// Define Container with requirements, bash commands and python scripts
 	python := client.Container().
 		From("python:3.12.2-bookworm").
-		WithDirectory("/app", client.Host().Directory("project")).
+		WithDirectory("/app", client.Host().Directory("project")). // Set directory
 		WithWorkdir("/app").
-		WithExec([]string{"pip", "install", "-r", "requirements.txt"}).
-		WithExec([]string{"dvc", "pull"}).
-		WithExec([]string{"python", "scripts/python/data_clean.py"}).
-		WithExec([]string{"python", "scripts/python/data_preprocess.py"}).
-		WithExec([]string{"python", "scripts/python/data_split.py"}).
-		WithExec([]string{"python", "scripts/python/model_training.py"}).
-		WithExec([]string{"python", "scripts/python/model_selection.py"}).
-		WithExec([]string{"python", "scripts/python/deploy.py"})
+		WithExec([]string{"pip", "install", "-r", "requirements.txt"}).    // Install requirements
+		WithExec([]string{"dvc", "pull"}).                                 // Pull data tracked by dvc
+		WithExec([]string{"python", "scripts/python/data_clean.py"}).      // Run data cleaning
+		WithExec([]string{"python", "scripts/python/data_preprocess.py"}). // Run data preprocessing
+		WithExec([]string{"python", "scripts/python/data_split.py"}).      // Split data for training and validation
+		WithExec([]string{"python", "scripts/python/model_training.py"}).  // Train model
+		WithExec([]string{"python", "scripts/python/model_selection.py"}). // Select best model
+		WithExec([]string{"python", "scripts/python/deploy.py"})           // Deploy best model
 
-	_, err = python.Directory("./artifacts").Export(ctx, "./artifacts")
+	_, err = python.Directory("./models").Export(ctx, "./models")
 	if err != nil {
 		return fmt.Errorf("export failed, %w", err)
 	}
