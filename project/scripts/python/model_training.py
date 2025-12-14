@@ -25,7 +25,7 @@ mlflow.set_tracking_uri("file:./artifacts/mlruns")
 mlflow.set_experiment(experiment_name)
 
 # Create paths
-os.makedirs("./models/artifacts/.trash", exist_ok=True)
+os.makedirs("./artifacts/mlruns/.trash", exist_ok=True)
 
 # Load training split
 train = pd.read_csv("./data/processed/train.csv")
