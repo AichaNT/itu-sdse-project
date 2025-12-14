@@ -33,7 +33,7 @@ jobs:
         uses: actions/upload-artifact@v4.4.0
         with:
           name: model
-          path: project/models/lead_model/python_model.pkl
+          path: models/lead_model/model.pkl
 
   test:
     name: Test Model
