@@ -38,10 +38,11 @@ if model_version_details['current_stage'] != 'Staging':
     )
     model_status = wait_for_deployment(model_name, model_version, 'Staging') 
 
-# Load model from MLflow registry
-model_uri = f"models:/{model_name}/{model_version}"
+# Save the model path
+local_path = f'./models/{model_name}'
 
-# Saving the model to "models"
-model = mlflow.pyfunc.load_model(model_uri)
-mlflow.pyfunc.save_model(model, path=f"./models/{model_name}_v{model_version}")
+# Load the model from the registry
+model_uri = f"models:/{model_name}/{model_version}"
+local_model_path = mlflow.artifacts.download_artifacts(model_uri, dst_path=local_path)
+
 
