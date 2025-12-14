@@ -1,4 +1,4 @@
-name: Run Dagger pipeline
+name: Train and Test Model
 
 on:
   push:
@@ -7,8 +7,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  dagger:
-    name: Run Dagger pipeline
+  train:
+    name: Train Model
     runs-on: ubuntu-latest
 
     steps:
@@ -30,7 +30,16 @@ jobs:
           version: "0.19.6"
 
       - name: Upload final model
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4.4.0
         with:
           name: model
-          path: project/models/lead_model_lr.pkl
+          path: project/models/lead_model/python_model.pkl
+
+  test:
+    name: Test Model
+    runs-on: ubuntu-latest
+    needs: train
+
+    steps:
+      - name: Run Model Inference Test
+        uses: lasselundstenjensen/itu-sdse-project-model-validator@main
