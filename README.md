@@ -10,8 +10,7 @@ Finally the project output a model artifact produced by GitHub workflow and name
 
 ## How to run the code
 
-## Project Organization / structure
-
+## Project Structure
 ```
 ├── README.md           <-
 │
