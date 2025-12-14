@@ -19,7 +19,7 @@ def wait_for_deployment(model_name, model_version, stage='Staging'):
     return status 
 
 # Load model info from selection step
-with open('./artifacts/best_model.json') as f:
+with open('./artifacts/metrics/best_model.json') as f:
     best_model = json.load(f)
 
 model_name = best_model['model_name']
