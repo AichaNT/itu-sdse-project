@@ -25,7 +25,7 @@ with open('./models/best_model.json') as f:
 model_name = best_model['model_name']
 model_version = best_model['model_version']
  
-
+mlflow.set_tracking_uri("file:./models/mlruns")
 client = MlflowClient()
 
 model_version_details = dict(client.get_model_version(name=model_name,version=model_version)) 
