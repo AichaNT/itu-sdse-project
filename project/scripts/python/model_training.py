@@ -21,11 +21,11 @@ experiment_name = current_date
 # Supress warnings
 warnings.filterwarnings('ignore')
 
-mlflow.set_tracking_uri("file:./models/mlruns")
+mlflow.set_tracking_uri("file:./artifacts/mlruns")
 mlflow.set_experiment(experiment_name)
 
 # Create paths
-os.makedirs("./models/mlruns/.trash", exist_ok=True)
+os.makedirs("./artifacts/mlruns/.trash", exist_ok=True)
 
 # Load training split
 train = pd.read_csv("./data/processed/train.csv")
@@ -50,7 +50,7 @@ experiment_id = mlflow.get_experiment_by_name(experiment_name).experiment_id
 
 with mlflow.start_run(experiment_id=experiment_id) as run: 
     model = LogisticRegression() 
-    lr_model_path = "./models/lead_model_lr.pkl"
+    lr_model_path = "./artifacts/temp_models/lead_model_lr.pkl"
 
     params = {
               'solver': ["newton-cg", "lbfgs", "liblinear", "sag", "saga"],
@@ -68,8 +68,12 @@ with mlflow.start_run(experiment_id=experiment_id) as run:
 
     # log artifacts
     mlflow.log_metric('f1_score', f1_score(y_test, y_pred_test))
-    mlflow.log_artifacts("artifacts", artifact_path="model")
     mlflow.log_param("data_version", "00000")
+
+    # log everything but mlruns
+    mlflow.log_artifacts("./artifacts/temp_models", artifact_path="temp_models")
+    mlflow.log_artifacts("./artifacts/metrics", artifact_path="metrics")
+    mlflow.log_artifact("./artifacts/scaler.pkl", artifact_path="scaler")
     
     # store model for model interpretability
     joblib.dump(value=best_model, filename=lr_model_path)
@@ -85,11 +89,11 @@ model_results = {
 }
 
 # Save columns and model results
-column_list_path = './artifacts/columns_list.json'
+column_list_path = './artifacts/metrics/columns_list.json'
 with open(column_list_path, 'w+') as columns_file:
     columns = {'column_names': list(X_train.columns)}
     json.dump(columns, columns_file)
 
-model_results_path = "./models/model_results.json"
+model_results_path = "./artifacts/metrics/model_results.json"
 with open(model_results_path, 'w+') as results_file:
     json.dump(model_results, results_file)

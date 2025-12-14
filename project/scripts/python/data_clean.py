@@ -12,7 +12,8 @@ max_date = "2024-01-31"
 min_date = "2024-01-01"
 
 
-os.makedirs("./artifacts",exist_ok=True)
+os.makedirs("./artifacts/temp_models", exist_ok=True)
+os.makedirs("./artifacts/metrics", exist_ok=True)
 
 warnings.filterwarnings('ignore')
 pd.set_option('display.float_format',lambda x: "%.3f" % x)
@@ -33,7 +34,7 @@ data = data[(data["date_part"] >= min_date) & (data["date_part"] <= max_date)]
 min_date = data["date_part"].min()
 max_date = data["date_part"].max()
 date_limits = {"min_date": str(min_date), "max_date": str(max_date)}
-with open("./artifacts/date_limits.json", "w") as f:
+with open("./artifacts/metrics/date_limits.json", "w") as f:
     json.dump(date_limits, f)
 
 

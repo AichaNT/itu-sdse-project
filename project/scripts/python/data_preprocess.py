@@ -65,11 +65,11 @@ cat_vars = data.loc[:, (data.dtypes=="object")]
 cont_vars = cont_vars.apply(lambda x: x.clip(lower = (x.mean()-2*x.std()),
                                              upper = (x.mean()+2*x.std())))
 outlier_summary = cont_vars.apply(describe_numeric_col).T
-outlier_summary.to_csv('./artifacts/outlier_summary.csv')
+outlier_summary.to_csv('./artifacts/metrics/outlier_summary.csv')
 
 # Impute missing data
 cat_missing_impute = cat_vars.mode(numeric_only=False, dropna=True)
-cat_missing_impute.to_csv("./artifacts/cat_missing_impute.csv")
+cat_missing_impute.to_csv("./artifacts/metrics/cat_missing_impute.csv")
 
 cont_vars = cont_vars.apply(impute_missing_values)
 cont_vars.apply(describe_numeric_col).T
@@ -95,7 +95,7 @@ data = pd.concat([cat_vars, cont_vars], axis=1)
 
 # Create data drift artifact
 data_columns = list(data.columns)
-with open('./artifacts/columns_drift.json','w+') as f:           
+with open('./artifacts/metrics/columns_drift.json','w+') as f:           
     json.dump(data_columns,f)
 
 # Saving data pre-binning

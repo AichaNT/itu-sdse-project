@@ -25,7 +25,7 @@ artifact_path = "model"
 model_name = "lead_model" 
 experiment_name = current_date 
 
-mlflow.set_tracking_uri("file:./models/mlruns")
+mlflow.set_tracking_uri("file:./artifacts/mlruns")
 experiment_ids = [mlflow.get_experiment_by_name(experiment_name).experiment_id] 
 
 experiment_best = mlflow.search_runs(
@@ -71,7 +71,7 @@ if run_id is not None:
     model_details = dict(model_details) 
 
 # Saving model information
-with open('./models/best_model.json', 'w') as f:
+with open('./artifacts/metrics/best_model.json', 'w') as f:
     json.dump({
         "model_name": model_name,
         "model_version": model_details['version']
