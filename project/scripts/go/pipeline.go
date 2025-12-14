@@ -33,11 +33,16 @@ func Build(ctx context.Context) error {
 		WithWorkdir("/app").
 		WithExec([]string{"pip", "install", "-r", "requirements.txt"}).
 		WithExec([]string{"dvc", "pull"}).
-		WithExec([]string{""}).
+		WithExec([]string{"python", "scripts/python/data_clean.py"}).
+		WithExec([]string{"python", "scripts/python/data_preprocess.py"}).
+		WithExec([]string{"python", "scripts/python/data_split.py"}).
+		WithExec([]string{"python", "scripts/python/model_training.py"}).
+		WithExec([]string{"python", "scripts/python/model_selection.py"}).
+		WithExec([]string{"python", "scripts/python/deploy.py"})
 
-	_, err = python.Directory("output").Export(ctx, "output")
+	_, err = python.Directory("./artifacts").Export(ctx, "./artifacts")
 	if err != nil {
-		return err
+		return fmt.Errorf("export failed, %w", err)
 	}
 
 	return nil
