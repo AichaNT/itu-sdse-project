@@ -37,7 +37,7 @@ func Build(ctx context.Context) error {
 		WithExec([]string{"python", "scripts/python/data_clean.py"}).                           // Run data cleaning
 		WithExec([]string{"python", "scripts/python/data_preprocess.py"}).                      // Run data preprocessing
 		WithExec([]string{"python", "scripts/python/data_split.py"}).                           // Split data for training and validation
-		WithExec([]string{"python", "scripts/python/model_training.py"}).                       // Train model
+		WithExec([]string{"python", "scripts/python/model_training.py"})                        // Train model
 
 	_, err = python.Directory("models").Export(ctx, "project/models")
 	if err != nil {
