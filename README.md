@@ -16,14 +16,14 @@ The goal of this project is to build a machine learning model that classifies we
 - Input: Behaviour data collected from users.
 - Output: A binary classification that determines whether a user has converted into a customer.
 
-This repository contains an end-to-end **MLOps pipeline** for training and deploying a machine learning model.
+This repository contains an end-to-end MLOps pipeline for training and deploying a machine learning model.
 The project follows a structured, reproducible workflow combining:
 
-- **Python** for data processing and model training
-- **DVC** to fetch data
-- **MLflow** for experiment tracking and model registry
-- **Dagger (Go)** for pipeline orchestration
-- **GitHub Actions** for automated CI training and testing
+- Python: for data processing and model training
+- DVC: to fetch data
+- MLflow: for experiment tracking and model registry
+- Dagger: (Go) for pipeline orchestration
+- GitHub: Actions for automated CI training and testing
 
 The pipeline trains a model, exports the final trained model artifact, and validates it using an external model validator.
 
@@ -74,10 +74,10 @@ The pipeline trains a model, exports the final trained model artifact, and valid
 
 The ML workflow is split into modular Python scripts:
 
-1. **Data cleaning** – removes inconsistencies and prepares raw data
-2. **Preprocessing** – feature engineering and transformations
-3. **Data splitting** – creates train/test datasets
-4. **Model training** – trains models and outputs final model
+1. `data_clean.py`: removes inconsistencies and prepares raw data
+2. `data_preprocess.py`: feature engineering and transformations
+3. `data_split.py`: creates train/test datasets
+4. `model_training.py`: trains models and outputs final model
 
 ---
 
